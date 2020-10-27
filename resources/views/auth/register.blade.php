@@ -16,17 +16,17 @@
                 
                 <div class="form-group">
                     {!! Form::label('email','Eメール') !!}
-                    {!! Form::text('name',old('name'),['class' => 'form-control']) !!}
+                    {!! Form::email('email',old('name'),['class' => 'form-control']) !!}
                 </div>
                 
                 <div class="form-group">
                     {!! Form::label('password','パスワード') !!}
-                    {!! Form::text('password',['class' => 'form-control']) !!}
+                    {!! Form::password('password',['class' => 'form-control']) !!}
                 </div>
                 
                 <div class="form-group">
                     {!! Form::label('password_confirmation','パスワードチェック') !!}
-                    {!! Form::text('password_confirmation',['class' => 'form-control']) !!}
+                    {!! Form::password('password_confirmation',['class' => 'form-control']) !!}
                 </div>
                 
                 {!! Form::submit('登録',['class' => 'btn btn-primary btn-block']) !!}
