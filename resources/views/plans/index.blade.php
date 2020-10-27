@@ -1,26 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>登録ユーザ一覧</h1>
-        @if (count($users) > 0)
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Eメール</th>
-                        <th>ユーザ名</th>
-                    </tr>
-                </thead>
+    <div class="center jumbotron">
+            <div class="text-center">
+                <h1>予定管理アプリ</h1>
+                {{-- 予定一覧表示ページへのリンク --}}
+                <button>予定一覧表示</button>
                 
-                <tbody>
-                    @foreach ($users as $users)
-                    <tr>
-                        <td>{{ $users->id }}</td>
-                        <td>{{ $users->email }}</td>
-                        <td>{{ $users->name }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
+                {{-- ユーザ一覧表示ページへのリンク --}}
+                 {!! link_to_route('user_list', 'ユーザ一覧表示', [], ['class' => 'btn btn-lg btn-primary']) !!} 
+            </div>
+        </div>
 @endsection
