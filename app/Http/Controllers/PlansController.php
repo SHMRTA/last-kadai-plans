@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;   //追加
+use Carbon\Carbon;  //日数取得の為カーボンライブラリを使用する
 
 
 class PlansController extends Controller
@@ -17,8 +18,22 @@ class PlansController extends Controller
     public function index()
     {
         $users = User::all();
-        logger($users);
-        return view('plans.task',['users' => $users]);
+        
+        
+        //今日の日付を取得
+        $day = \Carbon\Carbon::now();
+        
+        //今日から1週間後の日付取得
+        $next = \Carbon\Carbon::now();
+        $next_week = $next->addWeek(1);
+        
+        
+        
+        return view('plans.task',[
+            'users' => $users,
+            'day' => $day,
+            'week' => $next_week
+            ]);
         //return view('plans.task');
         
        
