@@ -22,7 +22,7 @@ class UserController extends Controller
             $user = \Auth::user();
             
             //リダイレクト
-           return view('plans.index');
+           return view('index');
            
         }else{
             //ログインしていないのでログイン画面を表示する
@@ -40,7 +40,7 @@ class UserController extends Controller
         $users = User::all();
         
         //ユーザ一覧を表示する
-            return view('plans.user_list',[
+            return view('users.user_list',[
              'users' => $users
              ]);
     }
@@ -87,7 +87,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $auth = Auth::user();
+        return view('users.edit',[
+            'user' =>$auth
+            ]);
     }
 
     /**
@@ -100,6 +103,14 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user_form = $request->all();
+        $user = Auth::user();
+        
+        //データ保存
+        $user->fill($user_form)->save();
+        
+        //リダイレクト
+        return redirect('/');
     }
 
     /**

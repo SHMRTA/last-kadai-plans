@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;   //追加
 
+
 class PlansController extends Controller
 {
     /**
@@ -15,7 +16,10 @@ class PlansController extends Controller
      */
     public function index()
     {
-        
+        $users = User::all();
+        logger($users);
+        return view('plans.task',['users' => $users]);
+        //return view('plans.task');
         
        
         

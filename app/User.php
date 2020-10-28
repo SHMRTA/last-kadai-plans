@@ -36,4 +36,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    
+    //planもモデルとの関係を定義
+    public function plans(){
+        return $this->hasMany(Plan::class);
+    }
 }

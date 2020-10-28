@@ -21,11 +21,14 @@ Route::get('/', function () {
 Route::get('users/list', 'UserController@list')->name('user_list');
 
 //index:showの補助ページ
-Route::get('/','UserController@index');
-//Route::get('user', 'UserController@index');
+//Route::get('/','UserController@index');       //左が正常
+
+//Route::get('/', 'CalendarController@show');     //かれんだー表示
+
+Route::get('/', 'PlansController@index');
 
 //ユーザの個別詳細処理
-Route::get('users', 'UserController@create')->name('user_create');
+Route::get('users', 'UserController@create');
 
 //ユーザの個別詳細処理
 Route::get('users/{id}', 'UserController@show');
@@ -41,7 +44,7 @@ Route::delete('usesr/{id}', 'UserController@destroy');
 
 
 
-Route::get('/','UserController@index');
+//Route::get('/','UserController@index');
 //Route::resource('plans','UserController');
 //Route::get('plans/create','UserController@create')->name('create.user');
 
