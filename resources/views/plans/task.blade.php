@@ -28,7 +28,8 @@
                                 
                             <tr>
                                 @php
-                                   logger($day);
+                                //$u = \Auth::user->name();
+                                //logger($u);
                                    
                                 @endphp
                                 
@@ -54,7 +55,7 @@
                         		<tr>
                         			<td>{{$users->name}}</td>
                         			@for($day = $monday->copy(); $day <= $sunday; $day->addDay(1))
-                            			<td></td>
+                            			<td bgcolor="red">予定1</td>
                             			<td></td>
                             			<td></td>
                             			<td></td>

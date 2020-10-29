@@ -11,8 +11,8 @@
                 <thead>
                     <tr>
                         <th>id</th>
+                        <th>ユーザー名</th>
                         <th>Eメール</th>
-                        <th>ユーザ名</th>
                     </tr>
                 </thead>
                 
@@ -20,8 +20,8 @@
                     @foreach ($users as $users)
                     <tr>
                         <td>{{ $users->id }}</td>
-                        <td>{{ $users->email }}</td>
                         <td>{{ $users->name }}</td>
+                        <td>{{ $users->email }}</td>
                     </tr>
                     @endforeach
                 </tbody>

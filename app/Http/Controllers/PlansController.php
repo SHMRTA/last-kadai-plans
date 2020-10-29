@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;   //追加
 use App\plan;
+use \Auth;
 use Carbon\Carbon;  //日数取得の為カーボンライブラリを使用する
 
 
@@ -29,6 +30,10 @@ class PlansController extends Controller
          $users = User::all();
          
         //$mi = new Carbon('2020-12-15');
+        
+        //loginユーザー名を表示
+        $u = \Auth::user()->name;
+        logger($u);
         
         //今日の日付を取得
         $day = new Carbon();
@@ -67,9 +72,10 @@ class PlansController extends Controller
     public function create()
     {
         $plans = new Plan;
+        
         //予定登録ページを表示
         return view('plans.create',[
-            'plans' => $plans,
+            'plan' => $plans
             ]);
         
     }
@@ -84,12 +90,13 @@ class PlansController extends Controller
     {
         //予定を作成
         $plan_c = new Plan;
+        $plan_c->user_id = Auth::id();
         $plan_c->date = $request->date;
         $plan_c->time_section = $request->time_section;
         $plan_c->content = $request->content;
-        
-        //戻る
-        return view('plans.task');
+        $plan_c->save();
+        //予定一覧ページへ戻る
+        return redirect('/plans');
     }
 
     /**
