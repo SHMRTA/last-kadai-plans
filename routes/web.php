@@ -17,36 +17,33 @@ Route::get('/', function () {
 });
 */
 
-//登録されたユーザ一覧を表示
-Route::get('users/list', 'UserController@list')->name('user_list');
-
-//index:showの補助ページ
-//Route::get('/','UserController@index');       //左が正常
-
-//Route::get('/', 'CalendarController@show');     //かれんだー表示
-
-Route::get('/', 'PlansController@index');
-
+/*
 //ユーザの個別詳細処理
 Route::get('users', 'UserController@create');
-
 //ユーザの個別詳細処理
 Route::get('users/{id}', 'UserController@show');
-
 //ユーザの新規登録処理
 Route::post('users', 'UserController@store');
-
 //ユーザの更新処理
 Route::put('users/{id}', 'UserController@update');
-
 //ユーザの削除
 Route::delete('usesr/{id}', 'UserController@destroy');
+*/
 
 
+//トップページを表示するルーティング
+Route::get('/','UserController@index');       
 
-//Route::get('/','UserController@index');
-//Route::resource('plans','UserController');
-//Route::get('plans/create','UserController@create')->name('create.user');
+//登録されたユーザ一覧表示のルーティング
+Route::get('users/list', 'UserController@list')->name('user_list');
+
+//登録された予定表示のルーティング
+Route::get('plans', 'PlansController@list')->name('plan_list');     
+
+//予定登録ページ表示のルーティング
+Route::get('plans/create', 'PlansController@create')->name('plan.create');
+
+
 
 //ユーザ登録
 Route::get('signup','Auth\RegisterController@showRegistrationForm')->name('signup.get');

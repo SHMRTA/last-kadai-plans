@@ -6,9 +6,10 @@
                 <h1>予定管理アプリ</h1>
                 {{-- 予定一覧表示ページへのリンク --}}
                 <button>予定一覧表示</button>
+                {!! link_to_route('plan_list', '予定一覧表示', [], ['class' => 'btn btn-lg btn-primary']) !!} 
                 
                 {{-- ユーザ一覧表示ページへのリンク --}}
-                 {!! link_to_route('user_list', 'ユーザ一覧表示', [], ['class' => 'btn btn-lg btn-primary']) !!} 
+                {!! link_to_route('user_list', 'ユーザ一覧表示', [], ['class' => 'btn btn-lg btn-primary']) !!} 
             </div>
         </div>
 @endsection

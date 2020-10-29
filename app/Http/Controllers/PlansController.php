@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;   //追加
+use App\plan;
 use Carbon\Carbon;  //日数取得の為カーボンライブラリを使用する
 
 
@@ -17,29 +18,45 @@ class PlansController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+       
+       
         
+    }
+    
+    public function list(){
+        
+        //ユーザ取得
+         $users = User::all();
+         
+        //$mi = new Carbon('2020-12-15');
         
         //今日の日付を取得
-        $day = \Carbon\Carbon::now();
+        $day = new Carbon();
         
-        //今日から1週間後の日付取得
-        $next = \Carbon\Carbon::now();
-        $next_week = $next->addWeek(1);
+        
+        //月曜日から日曜日まで日付を取得
+        $monday = Carbon::now()->startOfWeek();
+        $tuesday = $monday->copy()->addDay();
+        $wednesday = $tuesday->copy()->addDay();
+        $thursday = $wednesday->copy()->addDay();
+        $friday = $thursday->copy()->addDay();
+        $saturday = $friday->copy()->addDay();
+        $sunday = $saturday->copy()->addDay();
+        
         
         
         
         return view('plans.task',[
             'users' => $users,
             'day' => $day,
-            'week' => $next_week
+            'monday'=> $monday,
+            'sunday'=> $sunday,
+            
             ]);
         //return view('plans.task');
         
-       
-        
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -49,7 +66,11 @@ class PlansController extends Controller
      //
     public function create()
     {
-        
+        $plans = new Plan;
+        //予定登録ページを表示
+        return view('plans.create',[
+            'plans' => $plans,
+            ]);
         
     }
 
@@ -61,7 +82,14 @@ class PlansController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //予定を作成
+        $plan_c = new Plan;
+        $plan_c->date = $request->date;
+        $plan_c->time_section = $request->time_section;
+        $plan_c->content = $request->content;
+        
+        //戻る
+        return view('plans.task');
     }
 
     /**

@@ -6,46 +6,67 @@
             <!-- <div class="row jusify-content-center"> -->
             <div class="">
                 
-                    <table class="table table-striped">
+                    <table class="table table-striped" border="2">
+                        <thead>
+                            <tr>
+                                {{--月曜日から日曜日までの日付を表示する--}}
+                                
+                                @for ($day = $monday->copy(); $day <= $sunday; $day->addDay(1))
+                                    {{--月曜日だけ5つのセル　そのほかの曜日は4つのセルにしたい--}}
+                                    @php
+                                        $f_week = Carbon\Carbon::now()->startOfWeek(); 
+                                        
+                                    @endphp
+                                    
+                                    @if ($monday == $day)
+                                        <th colspan="5">{{ $day ->format("Y年n月j日") }}</th>
+                                    @else
+                                        <th colspan="4">{{ $day ->format("Y年n月j日") }}</th>
+                                    @endif
+                                @endfor
+                            </tr>
+                                
+                            <tr>
+                                @php
+                                   logger($day);
+                                   
+                                @endphp
+                                
+                                @for($day = $monday->copy(); $day <= $sunday; $day->addDay(1))
+                                    @if($monday == $day)
+                                        <th></th>
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                    @else
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                    @endif
+                                @endfor
+                            </tr>
+                        </thead>
+                                
                         <tbody>
-                            
-                            		
-                                @while ( $day < $week )
-                            		<tr>
-                            			<th colspan="5" >{{ $day ->format("Y年n月j日") }}</th>
-                            		</tr>
-                            	
-                            	
-                            
-                            		<tr>
-                            			<td><!-- 時間帯とユーザ名が重ならないようにする --></td>
-                            			<td>午前1</td>
-                            			<td>午前2</td>
-                            			<td>午後1</td>
-                            			<td>午後2</td>
-                            		</tr>
-                        		
-                        		     @php
-                        		        $day->addDays(1) 
-                                     @endphp  
-                        		     
-                        		@endwhile
-                        	
-                    		
-                    		@foreach ($users as $users)
+                            @foreach ($users as $users)
                         		<tr>
                         			<td>{{$users->name}}</td>
-                        			<td></td>
-                        			<td></td>
-                        			<td></td>
-                        			<td></td>
+                        			@for($day = $monday->copy(); $day <= $sunday; $day->addDay(1))
+                            			<td></td>
+                            			<td></td>
+                            			<td></td>
+                            			<td></td>
+                            		@endfor	
                         		</tr>
                     		@endforeach
-                    		
-                    	</tbody>
+                        </tbody>
                     </table>
-                </div>
-            
+                    
+                    {!! link_to_route('plan.create', '予定作成', [], ['class' => 'btn btn-lg btn-primary']) !!}
+                    
+            </div>
         </div>
     </div>
 @endsection
