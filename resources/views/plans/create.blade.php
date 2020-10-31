@@ -12,7 +12,14 @@
                  
                  <div class="form-group">
                     {!! Form::label('time_section','時間区分') !!}
-                    {!! Form::select('time_section',['1','2','3','4','5','6','7'],['class' => 'form-control']) !!}
+                    {!! Form::select('time_section',['1' => '午前1',
+                                                     '2' => '午前2',
+                                                     '3' => '午後1',
+                                                     '4' =>'午後2',
+                                                     '5' =>'午前',
+                                                     '6' =>'午後',
+                                                     '7' =>'1日'],
+                                    ['class' => 'form-control']) !!}
                  </div>  
                    
                 <div class="form-group">    

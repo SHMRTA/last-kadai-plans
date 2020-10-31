@@ -11,7 +11,7 @@ use Carbon\Carbon;  //日数取得の為カーボンライブラリを使用す�
 
 
 class PlansController extends Controller
-{
+{   
     /**
      * Display a listing of the resource.
      *
@@ -19,28 +19,38 @@ class PlansController extends Controller
      */
     public function index()
     {
-       
-       
+        
         
     }
     
     public function list(){
         
-        //ユーザ取得
+        //登録されている全ユーザを取得
          $users = User::all();
-         
-        //$mi = new Carbon('2020-12-15');
         
-        //loginユーザー名を表示
-        $u = \Auth::user()->name;
-        logger($u);
+         /*
+         //今日の日付を指定した日付に変更する方法＆月曜日の日付を取得できているか確認
+         $mirai = new Carbon('2020-12-15');
+         $ta = $mirai->startOfWeek();
+         dd($ta);
+         */
         
         //今日の日付を取得
         $day = new Carbon();
         
         
+       
+        
+        
+        //日付を検証
+        //dd($day);
+        
         //月曜日から日曜日まで日付を取得
+        
+        //月曜日を週初めと設定
         $monday = Carbon::now()->startOfWeek();
+        
+        
         $tuesday = $monday->copy()->addDay();
         $wednesday = $tuesday->copy()->addDay();
         $thursday = $wednesday->copy()->addDay();
@@ -48,17 +58,15 @@ class PlansController extends Controller
         $saturday = $friday->copy()->addDay();
         $sunday = $saturday->copy()->addDay();
         
-        
-        
-        
         return view('plans.task',[
             'users' => $users,
             'day' => $day,
             'monday'=> $monday,
             'sunday'=> $sunday,
             
-            ]);
-        //return view('plans.task');
+            
+        ]);
+        
         
     }
     
@@ -76,7 +84,7 @@ class PlansController extends Controller
         //予定登録ページを表示
         return view('plans.create',[
             'plan' => $plans
-            ]);
+        ]);
         
     }
 
@@ -95,6 +103,7 @@ class PlansController extends Controller
         $plan_c->time_section = $request->time_section;
         $plan_c->content = $request->content;
         $plan_c->save();
+        
         //予定一覧ページへ戻る
         return redirect('/plans');
     }
@@ -106,8 +115,22 @@ class PlansController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        //ログインしているユーザの名前が入っている
+        $usr = User::findOrFail($id);
+        //logger($usr);
+        $usr->loadRelationshipCounts();
+        
+       $plan_c = $usr->plans()->orderBy('date','desc');
+       
+       //ログインしたユーザの名前が入っている
+       logger($plan_c);
+       
+        //登録された予定を表示する
+        return view('plan.show',[
+            'plan' => $plan_c,
+            'user' =>$usr
+        ]);
     }
 
     /**

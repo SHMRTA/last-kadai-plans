@@ -18,7 +18,7 @@ class CreatePlansTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('content');
             $table->date('date');
-            $table->Time('time_section');
+            $table->bigInteger('time_section');
             $table->timestamps();
             
             //外部キー制約

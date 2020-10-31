@@ -42,9 +42,18 @@ Route::get('plans', 'PlansController@list')->name('plan_list');
 
 //予定登録ページ表示のルーティング
 Route::get('plans/create', 'PlansController@create')->name('plan.create');
+//Route::get('/', 'PlansController@create')->name('plan.create');
 
 //予定を登録する為のルーティング
 Route::post('plans','PlansController@store')->name('plan.store');
+
+
+//登録した予定を反映する為のルーティング
+//Route::get('plans/{id}','PlansController@show')->name('plan.show');
+
+//showの補助ページ
+//Route::post('plans','PlansController@index');
+
 
 
 

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\plan;
 
 class User extends Authenticatable
 {
@@ -42,4 +43,12 @@ class User extends Authenticatable
     public function plans(){
         return $this->hasMany(Plan::class);
     }
+    
+    public function getPlanForDay($day,$section){
+       
+        return $this->plans()->where('date',$day)->where('time_section',$section)->first();
+        
+    }
+    
+   
 }

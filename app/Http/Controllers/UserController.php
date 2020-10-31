@@ -85,6 +85,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+     
+     //未完成
     public function edit($id)
     {
         $auth = Auth::user();
@@ -100,6 +102,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+     
+     //未完成
     public function update(Request $request, $id)
     {
         //

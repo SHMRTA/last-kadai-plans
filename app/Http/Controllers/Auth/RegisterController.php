@@ -39,10 +39,10 @@ class RegisterController extends Controller
     public function __construct()
     {
         //元々・・ログインする前に登録処理を行う
-        //$this->middleware('guest');
+        $this->middleware('guest');
         
         //変更後・・ログインした後に登録処理を行う
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
