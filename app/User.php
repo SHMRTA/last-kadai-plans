@@ -44,11 +44,20 @@ class User extends Authenticatable
         return $this->hasMany(Plan::class);
     }
     
+    //予定のある日付を取得する
     public function getPlanForDay($day,$section){
-       
+       $i = $this->plans()->where('date',$day)->where('time_section',$section)->first();
+       //dd($day,$section);
+       //dd($this->plans);
         return $this->plans()->where('date',$day)->where('time_section',$section)->first();
         
     }
-    
+    //各ユーザに指定された日付に予定があるかチェックする
+    public function isTherePlanForDay($date,$section){
+        $plan_exit = $this->plans()->where('date',$date)->where('time_section',$section)->exists();
+        //dd($plan_exit);
+         return $this->plans()->where('date',$date)->where('time_section',$section)->exists();
+        
+    }
    
 }

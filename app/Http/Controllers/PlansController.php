@@ -17,6 +17,12 @@ class PlansController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     
+    //全てのviewに使える変数を定義する関数 
+    public function common(){
+        View::share('plan_c');
+    }
+    
     public function index()
     {
         
@@ -27,29 +33,17 @@ class PlansController extends Controller
         
         //登録されている全ユーザを取得
          $users = User::all();
-        
-         /*
-         //今日の日付を指定した日付に変更する方法＆月曜日の日付を取得できているか確認
-         $mirai = new Carbon('2020-12-15');
-         $ta = $mirai->startOfWeek();
-         dd($ta);
-         */
-        
+         
         //今日の日付を取得
         $day = new Carbon();
-        
-        
-       
-        
-        
-        //日付を検証
+        //taskブレードで使う日付を検証
         //dd($day);
+        
         
         //月曜日から日曜日まで日付を取得
         
         //月曜日を週初めと設定
         $monday = Carbon::now()->startOfWeek();
-        
         
         $tuesday = $monday->copy()->addDay();
         $wednesday = $tuesday->copy()->addDay();
@@ -63,6 +57,9 @@ class PlansController extends Controller
             'day' => $day,
             'monday'=> $monday,
             'sunday'=> $sunday,
+            'section_am' => $am,
+            'section_pm' => $pm,
+            'section_all' => $all_day,
             
             
         ]);
@@ -116,21 +113,8 @@ class PlansController extends Controller
      */
     public function show($id)
     {   
-        //ログインしているユーザの名前が入っている
-        $usr = User::findOrFail($id);
-        //logger($usr);
-        $usr->loadRelationshipCounts();
         
-       $plan_c = $usr->plans()->orderBy('date','desc');
-       
-       //ログインしたユーザの名前が入っている
-       logger($plan_c);
-       
-        //登録された予定を表示する
-        return view('plan.show',[
-            'plan' => $plan_c,
-            'user' =>$usr
-        ]);
+        
     }
 
     /**
@@ -164,6 +148,6 @@ class PlansController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

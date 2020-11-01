@@ -11,24 +11,6 @@
 |
 */
 
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
-
-/*
-//ユーザの個別詳細処理
-Route::get('users', 'UserController@create');
-//ユーザの個別詳細処理
-Route::get('users/{id}', 'UserController@show');
-//ユーザの新規登録処理
-Route::post('users', 'UserController@store');
-//ユーザの更新処理
-Route::put('users/{id}', 'UserController@update');
-//ユーザの削除
-Route::delete('usesr/{id}', 'UserController@destroy');
-*/
 
 
 //トップページを表示するルーティング
@@ -46,14 +28,6 @@ Route::get('plans/create', 'PlansController@create')->name('plan.create');
 
 //予定を登録する為のルーティング
 Route::post('plans','PlansController@store')->name('plan.store');
-
-
-//登録した予定を反映する為のルーティング
-//Route::get('plans/{id}','PlansController@show')->name('plan.show');
-
-//showの補助ページ
-//Route::post('plans','PlansController@index');
-
 
 
 
